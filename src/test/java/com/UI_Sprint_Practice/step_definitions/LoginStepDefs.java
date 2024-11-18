@@ -1,43 +1,100 @@
 package com.UI_Sprint_Practice.step_definitions;
 
 import com.UI_Sprint_Practice.pages.LoginPage;
-import com.UI_Sprint_Practice.utilities.ConfigurationReader;
 import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
+import org.junit.Assert;
+
 public class LoginStepDefs {
+
+     LoginPage loginPage=new LoginPage();
 
 
     @Given("the user is on the login page")
     public void the_user_is_on_the_login_page() {
-        System.out.println("Login to app in Before method");
+        System.out.println("Login to app in Hooks - Before method");
     }
 
-    @Given("the user logged in as {string}")
+
+    @When("the user logged in as {string}")
     public void the_user_logged_in_as(String userType) {
-        //based on input enter that user information
-        String username =null;
-        String password =null;
 
-        if(userType.equalsIgnoreCase("driver")){
-            username = ConfigurationReader.getProperty("driver_username");
-            password = ConfigurationReader.getProperty("driver_password");
-        }else if(userType.equalsIgnoreCase("sales manager")){
-            username = ConfigurationReader.getProperty("sales_manager_username");
-            password = ConfigurationReader.getProperty("sales_manager_password");
-        }else if(userType.equalsIgnoreCase("store manager")){
-            username = ConfigurationReader.getProperty("store_manager_username");
-            password = ConfigurationReader.getProperty("store_manager_password");
-        }
-        //send username and password and login
-        new LoginPage().login(username,password);
-    }
+        loginPage.login(userType);
 
-    @Given("the user logged in with username as {string} and password as {string}")
-    public void the_user_logged_in_with_username_as_and_password_as(String username, String password) {
-      LoginPage loginPage=new LoginPage();
-      loginPage.login(username,password);
     }
 
 
+    @Then("user should land on the activity stream page and see the {string} title")
+    public void userShouldLandOnTheActivityStreamPageAndSeeTheTitle(String title) {
+
+        Assert.assertEquals(title,loginPage.activityStreamTitle.getText());
+
+    }
+
+
+    @When("the user logged in with {string} and {string}")
+    public void the_user_logged_in_with_and(String userType, String password) {
+
+        loginPage.login(userType,password);
+
+    }
+
+
+    @Then("user see the error message {string}")
+    public void userSeeTheErrorMessage(String expectedErrorMessage) {
+
+        String actualErrorMessage = loginPage.errorMessage.getText();
+
+        Assert.assertEquals(expectedErrorMessage,actualErrorMessage);
+
+    }
+
+
+    @When("the user enters only {string} or {string}")
+    public void theUserEntersOnlyOr(String userType, String password) {
+
+        loginPage.login(userType,password);
+
+    }
+
+
+    @Then("user see the message {string}")
+    public void userSeeTheMessage(String expectedText) {
+
+        String actualErrorText = loginPage.errorMessage.getText();
+
+        Assert.assertEquals(expectedText,actualErrorText);
+
+    }
+
+    @When("user can see Remember me link")
+    public void userCanSeeRememberMeLink() {
+
+        Assert.assertTrue(loginPage.rememberMeButton.isDisplayed());
+
+    }
+
+
+    @Then("user can click the remember me button")
+    public void userCanClickTheRememberMeButton() {
+
+        loginPage.rememberMeButton.click();
+        Assert.assertTrue(loginPage.rememberMeButton.isSelected());
+
+    }
+
+
+
+    @Then("user see the password in bullet signs by default")
+    public void userSeeThePasswordInBulletSignsByDefault() {
+
+        String inputType = loginPage.passwordBox.getAttribute("type");
+
+        Assert.assertEquals("password", inputType);
+
+
+    }
 
 
 
