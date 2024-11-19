@@ -58,7 +58,7 @@ Feature: Login Functionality
 
    Scenario: Verify password is in bullet signs by default
      When user enters a password
-     Then password should be in bullet signs by default
+     Then "password" should be in bullet signs by default
 
 
 

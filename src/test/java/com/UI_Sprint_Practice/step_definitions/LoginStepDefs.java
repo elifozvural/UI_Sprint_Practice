@@ -96,14 +96,14 @@ public class LoginStepDefs {
 
     }
 
-    @Then("password should be in bullet signs by default")
-    public void passwordShouldBeInBulletSignsByDefault() {
+
+    @Then("{string} should be in bullet signs by default")
+    public void shouldBeInBulletSignsByDefault(String password) {
 
         String inputType = loginPage.passwordBox.getAttribute("type");
 
-        Assert.assertEquals("password", inputType);
+        Assert.assertEquals(password, inputType);
 
     }
-
 
 }
