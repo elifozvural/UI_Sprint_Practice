@@ -68,34 +68,42 @@ public class LoginStepDefs {
 
     }
 
-    @When("user can see Remember me link")
-    public void userCanSeeRememberMeLink() {
 
-        Assert.assertTrue(loginPage.rememberMeButton.isDisplayed());
+    @Then("remember me link should be displayed")
+    public void rememberMeLinkShouldBeDisplayed() {
+
+        Assert.assertTrue(loginPage.rememberMeCheckbox.isDisplayed());
+    }
+
+    @When("user clicks the remember me checkbox")
+    public void userClicksTheRememberMeCheckbox() {
+
+        loginPage.rememberMeCheckbox.click();
 
     }
 
+    @Then("the checkbox should be selected")
+    public void theCheckboxShouldBeSelected() {
 
-    @Then("user can click the remember me button")
-    public void userCanClickTheRememberMeButton() {
-
-        loginPage.rememberMeButton.click();
-        Assert.assertTrue(loginPage.rememberMeButton.isSelected());
+        Assert.assertTrue(loginPage.rememberMeCheckbox.isSelected());
 
     }
 
+    @When("user enters a password")
+    public void userEntersAPassword() {
 
+        loginPage.passwordBox.sendKeys("UserUser");
 
-    @Then("user see the password in bullet signs by default")
-    public void userSeeThePasswordInBulletSignsByDefault() {
+    }
+
+    @Then("password should be in bullet signs by default")
+    public void passwordShouldBeInBulletSignsByDefault() {
 
         String inputType = loginPage.passwordBox.getAttribute("type");
 
         Assert.assertEquals("password", inputType);
 
-
     }
-
 
 
 }

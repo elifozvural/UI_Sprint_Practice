@@ -30,11 +30,8 @@ public class LoginPage {
     @FindBy (className = "errortext")
     public WebElement errorMessage;
 
-    @FindBy(className = "login-item-checkbox-label")
-    public WebElement rememberMeText;
-
     @FindBy(id = "USER_REMEMBER")
-    public WebElement rememberMeButton;
+    public WebElement rememberMeCheckbox;
 
 
     public void login(String usertype) {

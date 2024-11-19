@@ -50,13 +50,15 @@ Feature: Login Functionality
 
 
     Scenario: Verify "Remember Me" link exists and is clickable
-      When user can see Remember me link
-      Then user can click the remember me button
+      Then remember me link should be displayed
+      When user clicks the remember me checkbox
+      Then the checkbox should be selected
 
 
 
    Scenario: Verify password is in bullet signs by default
-     Then user see the password in bullet signs by default
+     When user enters a password
+     Then password should be in bullet signs by default
 
 
 
