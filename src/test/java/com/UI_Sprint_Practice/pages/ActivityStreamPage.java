@@ -26,6 +26,8 @@ public class ActivityStreamPage {
     @FindBy(xpath = " //span[contains(@class,'menu-popup-item-text')]")
     public List<WebElement> optionsUnderMore;
 
+    @FindBy(xpath = "//span[@class='feed-add-post-micro-title']")
+    public WebElement sendMessageText;
 
 
 }
